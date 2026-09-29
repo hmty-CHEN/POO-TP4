@@ -2,13 +2,14 @@
 <html lang="fr"><head><meta charset="utf-8"><title>Rapport — Mon herbier numérique</title>
 <style>
 @page{size:A4;margin:18mm}*{box-sizing:border-box}body{margin:0;background:#edf0ed;color:#202b24;font:10.5pt/1.43 Georgia,serif}.page{width:210mm;min-height:297mm;margin:20px auto;padding:18mm;background:white;break-after:page}.page:last-child{break-after:auto}h1{font:700 25pt/1.15 system-ui;margin:12px 0}h2{font:700 15pt/1.25 system-ui;margin:0 0 14px}h3{font:700 11pt/1.3 system-ui;margin:17px 0 7px}p{margin:9px 0}code,pre{font:9pt/1.4 monospace}pre{padding:10px 14px;background:#f4f5f4;border-left:2px solid #879b8b;white-space:pre-wrap}table{border-collapse:collapse;width:100%;font-size:9.5pt;margin:12px 0}th,td{border:1px solid #b7c2ba;padding:6px;text-align:left}td:first-child{width:32%}.meta,footer{font:9pt/1.4 system-ui;color:#536659}footer{margin-top:18px;border-top:1px solid #bac5bd;padding-top:7px}a{color:#355a43}@media print{body{background:white}.page{width:auto;min-height:0;margin:0;padding:0}}
-.page:last-child{font-size:10pt;line-height:1.4}
+body{line-height:1.35}
+h2,h3{break-after:avoid}p{orphans:3;widows:3}
 </style></head><body>
 <section class="page">
 <p class="meta">TP PYTHON · PROGRAMMATION ORIENTÉE OBJET</p>
 <h1>Mon herbier numérique</h1>
 <p class="meta">Rapport de réalisation · Auteur : <strong>CHEN Qiyue</strong></p>
-<h3>1. Du fichier de plantes à une collection utilisable</h3>
+<h2>1. Du fichier de plantes à une collection utilisable</h2>
 <p>Ce programme permet de conserver des fiches de plantes et de réviser leurs familles botaniques. L'utilisateur commence par charger un fichier, puis consulte la collection, recherche une plante ou applique des filtres. Il peut ensuite modifier l'herbier, le sauvegarder et lancer un quiz. Le menu de <code>main.py</code> relie ces opérations et reste ouvert jusqu'au choix de quitter.</p>
 <p>La difficulté initiale vient du fichier fourni : ses 16 entrées ne sont pas toutes directement utilisables. Certaines valeurs diffèrent seulement par la casse ou les espaces, deux plantes sont répétées et une entrée n'a pas de nom. Charger ces données sans préparation conduirait à des recherches incohérentes. Le programme sépare donc trois opérations : nettoyer les valeurs, vérifier leur validité, puis créer les objets à conserver.</p>
 <h3>Nettoyer sans inventer les informations manquantes</h3>
