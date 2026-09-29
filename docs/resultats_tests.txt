@@ -1,0 +1,27 @@
+Commande : python3 -m unittest discover -v
+Date : 2026-09-29
+
+test_ajout_suppression_index ... ok
+test_bilan_nettoyage ... ok
+test_doublons ... ok
+test_fichiers_invalides_collection_conservee ... ok
+test_filtres ... ok
+test_menu_saisie_incorrecte ... ok
+test_normalisation ... ok
+test_photo_absente ... ok
+test_quiz_familles_insuffisantes ... ok
+test_quiz_score_et_unicite ... ok
+test_recherches ... ok
+test_revision_et_saisie_quiz ... ok
+test_serialisation ... ok
+test_uml_synchronise_avec_sources ... ok
+test_validation ... ok
+
+Ran 15 tests in 0.040s
+OK
+
+Contrôle HTTP et navigateur : /api/uml répond ; quatre classes métier
+et quatre relations affichées ; synchronisation en arrière-plan.
+Le test UML modifie une source temporaire, vérifie le changement de version
+et la présence de la nouvelle méthode dans le SVG ; une erreur de syntaxe
+préserve ensuite le dernier export valide.

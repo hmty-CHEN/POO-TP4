@@ -1,0 +1,44 @@
+{
+  "lus": 16,
+  "acceptes": 13,
+  "erreurs": [
+    {
+      "ligne": 11,
+      "message": "nom : texte obligatoire manquant ou incorrect"
+    }
+  ],
+  "doublons": {
+    "solanum lycopersicum": [
+      1,
+      2
+    ],
+    "ocimum basilicum": [
+      11,
+      16
+    ],
+    "daucus carota": [
+      13,
+      14
+    ]
+  },
+  "ignores": [
+    2,
+    14
+  ],
+  "corrections": [
+    1,
+    2,
+    4,
+    5,
+    7,
+    9,
+    10,
+    12,
+    13,
+    14,
+    16
+  ],
+  "photos_absentes": [
+    7
+  ]
+}

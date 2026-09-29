@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Système et éditeurs
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Exports personnels (les données et UML de référence restent versionnés)
+data/local/

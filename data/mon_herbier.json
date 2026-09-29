@@ -1,0 +1,141 @@
+[
+  {
+    "nom": "Tomate",
+    "nom_scientifique": "Solanum lycopersicum",
+    "famille": "Solanaceae",
+    "cycle": "annuel",
+    "besoins": [
+      "soleil",
+      "arrosage_regulier"
+    ],
+    "photo": "tomate.jpg"
+  },
+  {
+    "nom": "Tournesol",
+    "nom_scientifique": "Helianthus annuus",
+    "famille": "Asteraceae",
+    "cycle": "annuel",
+    "besoins": [
+      "soleil"
+    ],
+    "photo": "tournesol.jpg"
+  },
+  {
+    "nom": "Haricot",
+    "nom_scientifique": "Phaseolus vulgaris",
+    "famille": "Fabaceae",
+    "cycle": "annuel",
+    "besoins": [
+      "soleil",
+      "arrosage_moyen"
+    ],
+    "photo": "haricot.jpg"
+  },
+  {
+    "nom": "Pois",
+    "nom_scientifique": "Pisum sativum",
+    "famille": "Fabaceae",
+    "cycle": "annuel",
+    "besoins": [
+      "soleil",
+      "arrosage_moyen"
+    ],
+    "photo": "pois.jpg"
+  },
+  {
+    "nom": "Lavande",
+    "nom_scientifique": "Lavandula angustifolia",
+    "famille": "Lamiaceae",
+    "cycle": "vivace",
+    "besoins": [
+      "soleil",
+      "arrosage_faible"
+    ],
+    "photo": "lavande.jpg"
+  },
+  {
+    "nom": "Menthe",
+    "nom_scientifique": "Mentha sp.",
+    "famille": "Lamiaceae",
+    "cycle": "vivace",
+    "besoins": [
+      "mi-ombre",
+      "arrosage_frequent"
+    ],
+    "photo": null
+  },
+  {
+    "nom": "Chêne",
+    "nom_scientifique": "Quercus robur",
+    "famille": "Fagaceae",
+    "cycle": "vivace",
+    "besoins": [
+      "soleil"
+    ],
+    "photo": "chene.jpg"
+  },
+  {
+    "nom": "Rose",
+    "nom_scientifique": "Rosa gallica",
+    "famille": "Rosaceae",
+    "cycle": "vivace",
+    "besoins": [
+      "soleil",
+      "arrosage_moyen"
+    ],
+    "photo": "rose.jpg"
+  },
+  {
+    "nom": "Pissenlit",
+    "nom_scientifique": "Taraxacum officinale",
+    "famille": "Asteraceae",
+    "cycle": "vivace",
+    "besoins": [
+      "soleil"
+    ],
+    "photo": "pissenlit.jpg"
+  },
+  {
+    "nom": "Romarin",
+    "nom_scientifique": "Salvia rosmarinus",
+    "famille": "Lamiaceae",
+    "cycle": "vivace",
+    "besoins": [
+      "soleil",
+      "arrosage_faible"
+    ],
+    "photo": "romarin.jpg"
+  },
+  {
+    "nom": "Carotte",
+    "nom_scientifique": "Daucus carota",
+    "famille": "Apiaceae",
+    "cycle": "bisannuel",
+    "besoins": [
+      "soleil",
+      "arrosage_moyen"
+    ],
+    "photo": "carotte.jpg"
+  },
+  {
+    "nom": "Ortie",
+    "nom_scientifique": "Urtica dioica",
+    "famille": "Urticaceae",
+    "cycle": "vivace",
+    "besoins": [
+      "mi-ombre"
+    ],
+    "photo": "ortie.jpg"
+  },
+  {
+    "nom": "Basilic",
+    "nom_scientifique": "Ocimum basilicum",
+    "famille": "Lamiaceae",
+    "cycle": "annuel",
+    "besoins": [
+      "soleil",
+      "arrosage_frequent"
+    ],
+    "photo": "basilic.jpg"
+  }
+]

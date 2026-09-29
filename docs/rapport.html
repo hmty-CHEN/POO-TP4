@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><title>Rapport — Mon herbier numérique</title>
+<style>
+@page{size:A4;margin:18mm}*{box-sizing:border-box}body{font:11pt/1.45 Georgia,serif;color:#193227;background:#e8eee7;margin:0}.page{width:174mm;min-height:255mm;margin:20px auto;padding:10mm;background:white;page-break-after:always}.page:last-child{page-break-after:auto}h1{font: bold 25pt system-ui}h2{font: bold 14pt system-ui;margin:18px 0 8px}h3{font: bold 11pt system-ui}code{font:9pt monospace}table{border-collapse:collapse;width:100%;font-size:10pt}td,th{border:1px solid #a8b8ac;padding:5px;text-align:left}.kicker,footer{font:10pt system-ui;color:#597462}footer{margin-top:18px;border-top:1px solid #a8b8ac;padding-top:8px}@media print{body{background:white}.page{width:auto;min-height:0;margin:0;padding:0}}a{color:#315d42}
+.page:last-child{font-size:10.5pt;line-height:1.35}.page:last-child table{font-size:9.5pt}
+</style></head><body>
+<section class="page"><p class="kicker">TP PYTHON · PROGRAMMATION ORIENTÉE OBJET</p>
+<h1>Mon herbier numérique</h1><p>Rapport de réalisation — modèle objet, données et algorithmes</p>
+<h2>1. Objectif et modèle objet</h2>
+<p>L'application mémorise les caractéristiques des plantes, permet une exploration par recherche et filtres, sauvegarde les données et propose un quiz sur les familles botaniques. La structure modulaire reprend l'approche du précédent TP d'écosystème : une responsabilité claire par module, des noms français et des tests indépendants de l'interface.</p>
+<p><strong>Plante</strong> réunit les six attributs demandés : nom, nom scientifique, famille, cycle, besoins et photo. Son constructeur normalise et valide les entrées. <code>__str__</code> produit un affichage lisible ; <code>vers_dict</code> prépare la sérialisation. Le lancement de <code>plante.py</code> crée et affiche trois exemples.</p>
+<p><strong>Herbier</strong> possède un dictionnaire privé associant un nom scientifique normalisé à une Plante. Il gère l'ajout, la suppression, les recherches, les filtres et les fichiers. Les objets sont copiés à l'entrée et à la sortie : une modification extérieure ne peut pas désynchroniser la clé scientifique et la valeur stockée.</p>
+<p><strong>Quiz</strong> référence un Herbier et conserve une liste de <strong>Question</strong> ainsi que les réponses. Une Question référence une Plante et quatre familles proposées. Ces relations sont des associations, sans héritage artificiel : un herbier n'est pas une plante et un quiz n'est pas un herbier.</p>
+<p>Le diagramme <a href="uml/uml.html">uml.html</a> détaille les attributs, signatures et relations. Le serveur <code>tools/uml_live.py</code> analyse les fichiers avec <code>ast</code> et la page vérifie les changements toutes les secondes. Les exports HTML/SVG restent consultables hors ligne.</p>
+<h2>2. Structures et parcours</h2>
+<p>Le dictionnaire évite de parcourir une liste pour retrouver un nom scientifique exact. Les résultats des recherches partielles restent des listes ordonnées. Les familles du quiz sont dédupliquées par un ensemble ; les choix et réponses utilisent des listes. Un dictionnaire de positions sert au diagnostic des doublons.</p>
+<p>Les recherches par nom sont partielles, insensibles à la casse, aux accents et aux espaces inutiles. Les filtres par famille, cycle et besoin utilisent la même normalisation que les données. La méthode <code>filtrer</code> combine les critères par ET, notamment « vivaces ayant besoin d'ombre ». Un résultat vide est une réponse normale, affichée explicitement.</p>
+<footer>Mon herbier numérique · Rapport · 1 / 3</footer></section>
+<section class="page"><h2>3. Nettoyage et validation</h2>
+<p>Le fichier initial reproduit les 16 entrées du sujet, défauts compris. <code>nettoyer_plante</code> renvoie un nouveau dictionnaire, sans modifier l'original. <code>valider_plante</code> produit une liste d'erreurs. Les valeurs incohérentes ne sont pas transformées arbitrairement en texte.</p>
+<table><tr><th>Problème</th><th>Décision</th></tr>
+<tr><td>Espaces et casse</td><td>Espaces réduits ; initiale majuscule pour le nom ; cycles en minuscules.</td></tr>
+<tr><td>Familles</td><td>Convention latine ; alias explicite Solanacées → Solanaceae ; FABACEAE → Fabaceae.</td></tr>
+<tr><td>Besoins</td><td>Sans accents, séparateur « _ », exception mi-ombre. Régulier reste distinct de moyen.</td></tr>
+<tr><td>Nom vide</td><td>Entrée 11 signalée et rejetée, sans deviner « Basilic ». Entrée valide 16 acceptée.</td></tr>
+<tr><td>Photo null</td><td>Acceptée ; affichage « absente ». Pas d'accès obligatoire à une image.</td></tr>
+<tr><td>Doublons</td><td>Même clé scientifique : première entrée valide conservée. Tomate 2 et Carotte 14 ignorées.</td></tr></table>
+<p>Le rapport distingue les doublons bruts des exclusions : le groupe Ocimum basilicum (11, 16) est détecté avant validation, mais seule l'entrée 11 est rejetée pour nom vide. Le bilan final est <strong>13 plantes et 8 familles</strong>. Les nombres 25 et 12 de l'écran illustratif du sujet ne correspondent pas au jeu initial fourni.</p>
+<h2>4. Persistance et robustesse</h2>
+<p>Une donnée brute est une entrée reçue, éventuellement incohérente. Une donnée nettoyée respecte les conventions. Un objet Python associe cet état à des comportements ; JSON est une représentation textuelle portable, sans méthodes. <code>vers_dict</code> puis <code>json.dumps</code> réalisent l'export UTF-8 ; au retour, <code>json.loads</code> et le constructeur recréent les objets.</p>
+<p>La sérialisation permet de retrouver son travail après fermeture et d'échanger un herbier avec un autre programme ou utilisateur. L'aller-retour sauvegarde/rechargement est vérifié par égalité des six champs.</p>
+<p>Le chargement construit d'abord une nouvelle collection. Un fichier inexistant, mal formé ou de mauvaise structure ne détruit pas la collection courante. Les entrées invalides sont signalées dans un rapport ; un fichier non vide entièrement invalide est refusé. Une liste JSON vide vide volontairement l'herbier.</p>
+<p>Le menu reste actif jusqu'à 0. Les erreurs de saisie, plantes inconnues, recherches vides, erreurs de fichier et réponses de quiz invalides produisent des messages lisibles. Les exceptions précises <code>FileNotFoundError</code>, <code>JSONDecodeError</code>, <code>ValueError</code> et <code>OSError</code> sont traitées à l'interface.</p>
+<footer>Mon herbier numérique · Rapport · 2 / 3</footer></section>
+<section class="page"><h2>5. Quiz et révision</h2>
+<p><code>random.sample</code> sélectionne jusqu'à cinq plantes distinctes sans remise. Pour chacune, trois familles incorrectes sont tirées sans remise parmi les autres familles présentes ; la bonne réponse est ajoutée et <code>random.shuffle</code> mélange les quatre choix. Un appel répété à <code>random.choice</code> seul pourrait reprendre la même plante, car il ne la retire pas de la population.</p>
+<p>Le mode révision restreint les plantes à une famille, tout en conservant les distracteurs issus de l'herbier entier. Si moins de cinq plantes sont disponibles, le nombre de questions diminue et le score utilise ce nouveau total. S'il y a moins de quatre familles, le quiz est refusé avec un message explicite. Le score, le pourcentage et l'appréciation correspondent aux seuils du sujet : 100 %, 80 %, 60 %, puis révision conseillée.</p>
+<h2>6. Analyse algorithmique</h2>
+<table><tr><th>Opération / question</th><th>Complexité et justification</th></tr>
+<tr><td>Recherche linéaire par nom (Q1)</td><td>O(n) pour n plantes si la longueur des champs est bornée : chaque plante est examinée.</td></tr>
+<tr><td>Index scientifique (Q2–Q3)</td><td>Clé normalisée → objet dans un dictionnaire. Construction O(n), recherche exacte O(1) en moyenne, O(n) au pire en cas de collisions.</td></tr>
+<tr><td>Filtres combinés</td><td>O(n) à nombre de critères et taille des champs bornés ; résultats et copies occupent O(n).</td></tr>
+<tr><td>Doublons naïfs / indexés</td><td>Comparer toutes les paires : O(n²). Dictionnaire de clés déjà vues : O(n) en moyenne et O(n) mémoire.</td></tr>
+<tr><td>Sauvegarde / chargement</td><td>O(S) en taille totale des données S, sous les hypothèses moyennes du dictionnaire.</td></tr>
+<tr><td>Quiz (q questions, f familles)</td><td>O(n + f log f + qf), car les familles sont triées et la liste des distracteurs est construite à chaque question.</td></tr></table>
+<p>Les coûts de normalisation et de comparaison dépendent aussi de la longueur des chaînes ; les bornes en n supposent des champs de taille bornée. Nettoyer avant recherche (Q4) évite les faux négatifs et les faux doublons dus aux accents, espaces ou variantes. Les quatre niveaux de représentation (Q5) sont distingués en section 4 ; l'absence de remise répond à Q6.</p>
+<h2>7. Vérification et difficultés techniques</h2>
+<p>Les tests couvrent le jeu minimal demandé : tom/TOMATE, Fabaceae, vivace, soleil, inconnue, nom vide, photo null, doublon Carotte, restauration JSON et quiz de cinq questions avec score 4/5. Ils vérifient aussi les entrées de mauvais type, la préservation après erreur, le mode révision, les quatre choix distincts, les réponses invalides et la régénération UML après modification du code. Le résultat d'exécution figure dans <code>resultats_tests.txt</code>.</p>
+<p>Les points délicats sont la séparation entre doublon brut et entrée invalide, la protection de l'index contre les mutations et le maintien de quatre familles en mode révision. Des conventions explicites et des tests dédiés rendent ces choix reproductibles. La solution fonctionne avec la bibliothèque standard, y compris la génération UML hors ligne.</p>
+<footer>Mon herbier numérique · Rapport · 3 / 3</footer></section></body></html>
