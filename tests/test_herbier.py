@@ -127,21 +127,22 @@ class TestsHerbier(unittest.TestCase):
             index = question.choix.index(question.plante.famille)
             if i == 4:
                 index = (index + 1) % 4
-            quiz.repondre("ABCD"[index])
+            quiz.repondre(str(index + 1))
         self.assertEqual(quiz.resultat(), dict(score=4, total=5, pourcentage=80, appreciation="Très bien !"))
         with self.assertRaises(ValueError):
-            quiz.repondre("A")
+            quiz.repondre("1")
 
     def test_revision_et_saisie_quiz(self):
         quiz = Quiz(self.herbier)
         questions = quiz.preparer(famille="Lamiaceae")
         self.assertEqual(len(questions), 4)
         self.assertTrue(all(q.plante.famille == "Lamiaceae" for q in questions))
-        with self.assertRaises(ValueError):
-            quiz.repondre("abc")
+        for invalide in ("abc", "A", "0", "5", "", "1.0"):
+            with self.assertRaises(ValueError):
+                quiz.repondre(invalide)
         self.assertEqual(quiz.reponses, [])
         for q in questions:
-            quiz.repondre("ABCD"[q.choix.index(q.plante.famille)])
+            quiz.repondre(f" {q.choix.index(q.plante.famille) + 1} ")
         self.assertEqual(quiz.resultat()["pourcentage"], 100)
 
     def test_quiz_familles_insuffisantes(self):

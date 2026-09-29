@@ -34,7 +34,7 @@ class Quiz:
         if len(self.reponses) >= len(self.questions):
             raise ValueError("Le quiz est terminé ou n'a pas commencé.")
         correcte = self.questions[len(self.reponses)].verifier(reponse)
-        self.reponses.append(reponse.strip().upper())
+        self.reponses.append(reponse.strip())
         return correcte
 
     def resultat(self) -> dict:

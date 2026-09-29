@@ -10,7 +10,7 @@ class Question:
         self.choix: list[str] = choix
 
     def verifier(self, reponse: str) -> bool:
-        lettre = reponse.strip().upper()
-        if lettre not in ("A", "B", "C", "D"):
-            raise ValueError("Répondre A, B, C ou D.")
-        return self.choix[ord(lettre) - ord("A")] == self.plante.famille
+        numero = reponse.strip()
+        if numero not in ("1", "2", "3", "4"):
+            raise ValueError("Répondre 1, 2, 3 ou 4.")
+        return self.choix[int(numero) - 1] == self.plante.famille

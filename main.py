@@ -47,8 +47,8 @@ def lancer_quiz(herbier):
     print(f"{len(questions)} questions, sans répétition.")
     for numero, question in enumerate(questions, 1):
         print(f"\n{numero}. Quelle est la famille botanique de {question.plante.nom} ?")
-        for lettre, famille in zip("ABCD", question.choix):
-            print(f"{lettre}. {famille}")
+        for choix_numero, famille in enumerate(question.choix, 1):
+            print(f"{choix_numero}. {famille}")
         while True:
             try:
                 correcte = quiz.repondre(input("Réponse : "))
