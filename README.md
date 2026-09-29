@@ -40,7 +40,7 @@ la collection courante après validation du fichier.
 │   └── mon_herbier.json         # 13 plantes valides, 8 familles
 ├── docs/
 │   ├── sujet/TP Mon herbier.docx
-│   ├── rapport.html            # Rapport en trois pages A4
+│   ├── rapport.html            # Rapport en quatre pages A4
 │   ├── rapport_nettoyage.json  # Corrections, rejets et doublons
 │   ├── resultats_tests.txt
 │   └── uml/
@@ -114,7 +114,7 @@ Les tests vérifient les exigences du sujet, les cas limites, le score, les fich
 invalides, l'intégrité de l'index et la régénération UML. GitHub Actions exécutera
 les tests sur Python 3.9, 3.12 et 3.13 et vérifiera la génération du diagramme.
 
-- [Rapport français, trois pages A4](docs/rapport.html)
+- [Rapport français, quatre pages A4](docs/rapport.html)
 - [Bilan de nettoyage](docs/rapport_nettoyage.json)
 - [Résultats des tests](docs/resultats_tests.txt)
 - [Diagramme UML vectoriel](docs/uml/uml.svg)
